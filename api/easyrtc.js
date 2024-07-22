@@ -7105,7 +7105,9 @@ var Easyrtc = function() {
         var streamId = peerStream.id || "default";
         var remoteName = getNameOfRemoteStream(otherUser, streamId) || "default";
 
-        if (!peerConn.liveRemoteStreams[remoteName]) {
+        // ignore existing remote stream, 
+        // there were issues with removign "default" stream
+        if (!peerConn.liveRemoteStreams[remoteName] || true) {
 
             peerConn.remoteStreamIdToName[streamId] = remoteName;
             peerConn.liveRemoteStreams[remoteName] = true;
